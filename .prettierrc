@@ -1,4 +1,5 @@
 {
+	"plugins": ["prettier-plugin-tailwindcss"],
 	"resolveGlobalModules": false,
 	"arrowParens": "avoid",
 	"bracketSpacing": true,
