@@ -9,7 +9,21 @@ export default {
 	],
 	theme: {
 		extend: {
-			colors: {},
+			colors: {
+				nero: '#171717',
+				matteBlack: '#232323',
+				orangedRed: '#ff4500',
+				lime: '#00FF00',
+				rebeccaPurple: '#663399',
+				mediumPurple: '#9370DB',
+				lavender: '#E6E6FA',
+				ghostWhite: '#F8F8FF',
+				gold: '#FFD700',
+			},
+			fontFamily: {
+				inter: ['Inter', 'sans-serif'],
+				alumniSansPinstripe: ['Alumni Sans Pinstripe', 'sans-serif'],
+			},
 		},
 	},
 	plugins: [],
