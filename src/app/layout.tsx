@@ -1,6 +1,6 @@
 import { Inter, Alumni_Sans_Pinstripe } from 'next/font/google';
 
-import './globals.css';
+import '../styles/globals.css';
 import clsx from 'clsx';
 
 const inter = Inter({ subsets: ['latin'], weight: ['400', '700'] });
