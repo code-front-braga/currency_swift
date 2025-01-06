@@ -1,6 +1,11 @@
-type AmountStore {
-  amount: string;
-  setAmount: (amount: string) => void;
-}
+import { create } from 'zustand';
 
-export default function useAmountStore: create
+type AmountStore = {
+	amount: string;
+	setAmount: (amount: string) => void;
+};
+
+export const useAmountStore = create<AmountStore>(set => ({
+	amount: '',
+	setAmount: amount => set({ amount }),
+}));
