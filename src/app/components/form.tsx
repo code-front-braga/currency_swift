@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import useTheme from '../hooks/useTheme';
 
 interface FormProps {
-	handleSubmit: VoidFunction;
+	handleSubmit: (e: React.FormEvent) => void;
 	children: React.ReactNode;
 }
 

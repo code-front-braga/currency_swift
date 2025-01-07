@@ -15,8 +15,7 @@ export default function Header() {
 				<h1
 					className={clsx('font-alumniSansPinstripe text-[3rem] font-semibold', {
 						'text-matteBlack': !darkMode,
-						'dark:from-orangeRed dark:to-orangeRed bg-gradient-to-r text-transparent dark:via-gold dark:bg-clip-text':
-							darkMode,
+						'bg-gradient-to-r from-orangedRed via-gold to-orangedRed bg-clip-text text-transparent': darkMode,
 					})}
 				>
 					Currency{' '}
