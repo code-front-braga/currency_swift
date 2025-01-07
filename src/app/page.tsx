@@ -17,6 +17,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useTheme } from './hooks/use-theme';
 import { fetchAvailableCurrencies } from '@/server/actions/fetchAvailableCurrencies';
 import { CurrenciesPair, fetchExchangeRates } from '@/server/actions/fetchExchangeRates';
+import CurrencyOptions from './components/options-currency';
 
 export default function HomePage() {
 	const { darkMode } = useTheme();
@@ -109,7 +110,10 @@ export default function HomePage() {
 						/>
 						<div className="relative w-[30%]">
 							<CurrencySelector
-								onHandleClick={setFromInput}
+								onHandleClick={() => {
+									setFromInput(fromInput);
+									setShowOptions(true);
+								}}
 								selectedCurrency={fromInput}
 								className={clsx('w-full cursor-pointer border-l p-[.4rem] font-inter transition-colors duration-700', {
 									'text-nero': !darkMode,
@@ -123,6 +127,7 @@ export default function HomePage() {
 									'text-orangedRed': darkMode,
 								})}
 							/>
+							{showOptions && <CurrencyOptions currencies={currencies} />}
 						</div>
 					</div>
 
