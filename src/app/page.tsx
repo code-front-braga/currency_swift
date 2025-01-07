@@ -18,6 +18,7 @@ import { useTheme } from './hooks/use-theme';
 import { fetchAvailableCurrencies } from '@/server/actions/fetchAvailableCurrencies';
 import { CurrenciesPair, fetchExchangeRates } from '@/server/actions/fetchExchangeRates';
 import CurrencyOptions from './components/options-currency';
+import formatCurrency from '@/utils/formatCurrency';
 
 export default function HomePage() {
 	const { darkMode } = useTheme();
@@ -99,7 +100,7 @@ export default function HomePage() {
 						/>
 						<Input
 							type="text"
-							amount={amount}
+							amount={amount ? formatCurrency(parseFloat(amount)) : ''}
 							onAmountChange={handleFromInputChange}
 							className={clsx(
 								'w-[70%] bg-transparent p-[.6rem] indent-[2rem] font-inter text-[1.4rem] outline-none transition-colors duration-700',
@@ -171,7 +172,7 @@ export default function HomePage() {
 						/>
 						<Input
 							type="text"
-							amount={convertedAmount}
+							amount={convertedAmount ? formatCurrency(parseFloat(convertedAmount)) : ''}
 							readOnly
 							placeholder="0,00"
 							className={clsx(
