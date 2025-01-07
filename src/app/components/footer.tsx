@@ -12,8 +12,8 @@ export default function Footer() {
 		>
 			<p
 				className={clsx('text-center font-inter text-[1.2rem]', {
-					'text-nero': !darkMode,
-					'text-ghostWhite': darkMode,
+					'text-ghostWhite': !darkMode,
+					'text-matteBlack': darkMode,
 				})}
 			>
 				&copy; {new Date().getFullYear()} Currency Swift. Created by Leonardo Braga.
