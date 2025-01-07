@@ -27,7 +27,8 @@ export default function HomePage() {
 	const [amount, setAmount] = useState<string>('1');
 	const [debouncedAmount, setDebouncedAmount] = useState<string>('');
 	const [convertedAmount, setConvertedAmount] = useState<string>('');
-	const [showOptions, setShowOptions] = useState<boolean>(false);
+	const [showFromOptions, setShowFromOptions] = useState<boolean>(false);
+	const [showToOptions, setShowToOptions] = useState<boolean>(false);
 
 	const handleFromInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -111,14 +112,16 @@ export default function HomePage() {
 						<div className="relative w-[30%]">
 							<CurrencySelector
 								onHandleClick={() => {
-									setFromInput(fromInput);
-									setShowOptions(true);
+									setShowFromOptions(!showFromOptions);
 								}}
 								selectedCurrency={fromInput}
-								className={clsx('w-full cursor-pointer border-l p-[.4rem] font-inter transition-colors duration-700', {
-									'text-nero': !darkMode,
-									'text-ghostWhite': darkMode,
-								})}
+								className={clsx(
+									'relative w-full cursor-pointer border-l p-[.4rem] font-inter transition-colors duration-700',
+									{
+										'text-nero': !darkMode,
+										'text-ghostWhite': darkMode,
+									},
+								)}
 							/>
 							<TiArrowSortedDown
 								size={18}
@@ -127,7 +130,12 @@ export default function HomePage() {
 									'text-orangedRed': darkMode,
 								})}
 							/>
-							{showOptions && <CurrencyOptions currencies={currencies} />}
+							<CurrencyOptions
+								setShowOptions={setShowFromOptions}
+								currencies={currencies}
+								onHandleClick={setFromInput}
+								showOptions={showFromOptions}
+							/>
 						</div>
 					</div>
 
@@ -176,7 +184,9 @@ export default function HomePage() {
 						/>
 						<div className="relative w-[30%]">
 							<CurrencySelector
-								onHandleClick={setToInput}
+								onHandleClick={() => {
+									setShowToOptions(!showToOptions);
+								}}
 								selectedCurrency={toInput}
 								className={clsx('w-full cursor-pointer border-l p-[.4rem] font-inter transition-colors duration-700', {
 									'text-nero': !darkMode,
@@ -189,6 +199,12 @@ export default function HomePage() {
 									'text-rebeccaPurple': !darkMode,
 									'text-orangedRed': darkMode,
 								})}
+							/>
+							<CurrencyOptions
+								setShowOptions={setShowToOptions}
+								currencies={currencies}
+								onHandleClick={setToInput}
+								showOptions={showToOptions}
 							/>
 						</div>
 					</div>
