@@ -1,24 +1,26 @@
 'use client';
 
-import Background from './components/background';
-import Footer from './components/footer';
-import Form from './components/form';
-import Header from './components/header';
-import Label from './components/label';
-import Main from './components/main';
-import ThemeToggle from './components/theme-toggle';
-import Input from './components/input';
-import CurrencySelector from './components/select-currency';
-import Button from './components/button';
+import { ChangeEvent, useEffect, useState } from 'react';
 import clsx from 'clsx';
+import { useTheme } from './hooks/use-theme';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { MdCurrencyExchange } from 'react-icons/md';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { useTheme } from './hooks/use-theme';
 import { fetchAvailableCurrencies } from '@/server/actions/fetchAvailableCurrencies';
 import { CurrenciesPair, fetchExchangeRates } from '@/server/actions/fetchExchangeRates';
-import CurrencyOptions from './components/options-currency';
+
+// Components:
 import formatCurrency from '@/utils/formatCurrency';
+import Background from './components/background';
+import Main from './components/main';
+import Header from './components/header';
+import ThemeToggle from './components/theme-toggle';
+import Form from './components/form';
+import Label from './components/label';
+import Input from './components/input';
+import CurrencySelector from './components/select-currency';
+import CurrencyOptions from './components/options-currency';
+import Button from './components/button';
+import Footer from './components/footer';
 
 export default function HomePage() {
 	const { darkMode } = useTheme();
