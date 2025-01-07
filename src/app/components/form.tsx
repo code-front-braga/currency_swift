@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import useTheme from '../hooks/useTheme';
+import { useTheme } from '../hooks/use-theme';
+
 
 interface FormProps {
 	handleSubmit: (e: React.FormEvent) => void;

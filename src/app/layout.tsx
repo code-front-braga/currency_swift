@@ -2,6 +2,7 @@ import { Inter, Alumni_Sans_Pinstripe } from 'next/font/google';
 
 import '../styles/globals.css';
 import clsx from 'clsx';
+import { ThemeProvider } from './context/theme-context';
 
 const inter = Inter({ subsets: ['latin'], weight: ['400', '700'] });
 const alumniSansPinstripe = Alumni_Sans_Pinstripe({
@@ -16,7 +17,9 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="pt-br">
-			<body className={clsx('antialiased', inter.className, alumniSansPinstripe.className)}>{children}</body>
+			<body className={clsx('antialiased', inter.className, alumniSansPinstripe.className)}>
+				<ThemeProvider>{children}</ThemeProvider>
+			</body>
 		</html>
 	);
 }

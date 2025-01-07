@@ -8,13 +8,13 @@ import Header from './components/header';
 import Label from './components/label';
 import Main from './components/main';
 import ThemeToggle from './components/theme-toggle';
-import useTheme from './hooks/useTheme';
 import Input from './components/input';
 import CurrencySelector from './components/select-currency';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import Button from './components/button';
 import { MdCurrencyExchange } from 'react-icons/md';
 import { ChangeEvent, useState } from 'react';
+import { useTheme } from './hooks/use-theme';
 
 export default function HomePage() {
 	const { darkMode } = useTheme();
@@ -31,14 +31,11 @@ export default function HomePage() {
 
 	const handleFromInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
-
 		const numericValue = value.replace(/\D/g, '');
-
 		if (!numericValue) {
 			setAmount('0');
 			return;
 		}
-
 		setAmount((parseFloat(numericValue) / 100).toString());
 	};
 

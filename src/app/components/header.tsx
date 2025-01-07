@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { CgArrowsExchangeAltV } from 'react-icons/cg';
-import useTheme from '../hooks/useTheme';
+import { useTheme } from '../hooks/use-theme';
 
 export default function Header() {
 	const { darkMode } = useTheme();

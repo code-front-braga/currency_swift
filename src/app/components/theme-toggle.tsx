@@ -2,14 +2,10 @@
 
 import clsx from 'clsx';
 import { motion } from 'motion/react';
-import useTheme from '../hooks/useTheme';
+import { useTheme } from '../hooks/use-theme';
 
-interface ThemeToggleProps {
-	handleClick: VoidFunction;
-}
-
-export default function ThemeToggle({ handleClick }: ThemeToggleProps) {
-	const { darkMode } = useTheme();
+export default function ThemeToggle() {
+	const {darkMode, toggleTheme } = useTheme();
 
 	return (
 		<button
@@ -17,7 +13,7 @@ export default function ThemeToggle({ handleClick }: ThemeToggleProps) {
 				'justify-start bg-rebeccaPurple bg-opacity-60': !darkMode,
 				'justify-end bg-orangedRed bg-opacity-50': darkMode,
 			})}
-			onClick={handleClick}
+			onClick={toggleTheme}
 		>
 			<motion.div
 				className={clsx('h-[2.2rem] w-[2.2rem] rounded-full transition-colors duration-700', {

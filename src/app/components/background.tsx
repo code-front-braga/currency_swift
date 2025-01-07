@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import useTheme from '../hooks/useTheme';
+import { useTheme } from '../hooks/use-theme';
+
 
 export default function Background() {
 	const { darkMode } = useTheme();
