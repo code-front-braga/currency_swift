@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import Background from './components/background';
 import Footer from './components/footer';
 import Form from './components/form';
@@ -10,24 +9,24 @@ import Main from './components/main';
 import ThemeToggle from './components/theme-toggle';
 import Input from './components/input';
 import CurrencySelector from './components/select-currency';
-import { TiArrowSortedDown } from 'react-icons/ti';
 import Button from './components/button';
+import clsx from 'clsx';
+import { TiArrowSortedDown } from 'react-icons/ti';
 import { MdCurrencyExchange } from 'react-icons/md';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useTheme } from './hooks/use-theme';
+import { fetchAvailableCurrencies } from '@/server/actions/fetchAvailableCurrencies';
+import { CurrenciesPair, fetchExchangeRates } from '@/server/actions/fetchExchangeRates';
 
 export default function HomePage() {
 	const { darkMode } = useTheme();
+	const [currencies, setCurrencies] = useState<string[]>([]);
 	const [fromInput, setFromInput] = useState<string>('USD');
 	const [toInput, setToInput] = useState<string>('BRL');
 	const [amount, setAmount] = useState<string>('1');
-	// const [debouncedAmount, setDebouncedAmount] = useState<string>('');
+	const [debouncedAmount, setDebouncedAmount] = useState<string>('');
 	const [convertedAmount, setConvertedAmount] = useState<string>('');
-
-	const handleConvert = (e: React.FormEvent) => {
-		e.preventDefault();
-		console.log('Working');
-	};
+	const [showOptions, setShowOptions] = useState<boolean>(false);
 
 	const handleFromInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -39,6 +38,35 @@ export default function HomePage() {
 		setAmount((parseFloat(numericValue) / 100).toString());
 	};
 
+	const handleConvertCurrency = async (e: React.FormEvent) => {
+		e.preventDefault();
+		if (!amount || isNaN(parseFloat(amount))) {
+			return;
+		}
+
+		try {
+			const data: CurrenciesPair = await fetchExchangeRates(fromInput);
+			const rate = data.rates[toInput];
+			if (!rate) {
+				return;
+			}
+
+			const result = (parseFloat(debouncedAmount) * rate).toFixed(2);
+			setConvertedAmount(result);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		const debounceTimer = setTimeout(() => setDebouncedAmount(amount), 300);
+		return () => clearTimeout(debounceTimer);
+	}, [amount]);
+
+	useEffect(() => {
+		fetchAvailableCurrencies().then(setCurrencies);
+	}, []);
+
 	return (
 		<>
 			<Background />
@@ -46,7 +74,7 @@ export default function HomePage() {
 				<Header />
 				<ThemeToggle />
 
-				<Form handleSubmit={handleConvert}>
+				<Form handleSubmit={handleConvertCurrency}>
 					<div
 						className={clsx(
 							'relative flex w-full items-center gap-2 rounded-[.6rem] border-b-[.3em] p-[.8rem] transition-colors duration-700',
