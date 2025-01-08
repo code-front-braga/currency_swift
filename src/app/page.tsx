@@ -7,6 +7,7 @@ import { TiArrowSortedDown } from 'react-icons/ti';
 import { MdCurrencyExchange } from 'react-icons/md';
 import { fetchAvailableCurrencies } from '@/server/actions/fetchAvailableCurrencies';
 import { CurrenciesPair, fetchExchangeRates } from '@/server/actions/fetchExchangeRates';
+import { motion } from 'motion/react';
 
 // Components:
 import formatCurrency from '@/utils/formatCurrency';
@@ -32,6 +33,7 @@ export default function HomePage() {
 	const [convertedAmount, setConvertedAmount] = useState<string>('');
 	const [showFromOptions, setShowFromOptions] = useState<boolean>(false);
 	const [showToOptions, setShowToOptions] = useState<boolean>(false);
+	const [isClicked, setIsClicked] = useState<boolean>(false);
 
 	const handleFromInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -61,6 +63,11 @@ export default function HomePage() {
 		} catch (error) {
 			console.log(error);
 		}
+	};
+
+	const handleClick = () => {
+		setIsClicked(true); // Ativa a animação
+		setTimeout(() => setIsClicked(false), 1000); // Reseta o estado após a animação
 	};
 
 	useEffect(() => {
@@ -142,14 +149,19 @@ export default function HomePage() {
 						</div>
 					</div>
 
-					<Button type="submit" className="">
-						<MdCurrencyExchange
-							size={24}
-							className={clsx('transition-colors duration-700', {
-								'text-mediumPurple': !darkMode,
-								'text-orangedRed': darkMode,
-							})}
-						/>
+					<Button type="submit" onClick={handleClick} className="">
+						<motion.div
+							animate={isClicked ? { rotate: [0, 360, 0] } : { rotate: 0 }}
+							transition={{ duration: 1, ease: 'easeInOut' }}
+						>
+							<MdCurrencyExchange
+								size={30}
+								className={clsx('transition-colors duration-700', {
+									'text-mediumPurple': !darkMode,
+									'text-orangedRed': darkMode,
+								})}
+							/>
+						</motion.div>
 					</Button>
 
 					<div
