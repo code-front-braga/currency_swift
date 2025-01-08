@@ -135,10 +135,16 @@ export default function HomePage() {
 							/>
 							<TiArrowSortedDown
 								size={18}
-								className={clsx('absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700', {
-									'text-rebeccaPurple': !darkMode,
-									'text-orangedRed': darkMode,
-								})}
+								className={clsx(
+									'absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700',
+									{
+										'text-rebeccaPurple': !darkMode,
+										'text-orangedRed': darkMode,
+									},
+									showFromOptions
+										? '-rotate-180 transition-transform duration-300 ease-in'
+										: 'rotate-0 transition-transform duration-300 ease-in',
+								)}
 							/>
 							<CurrencyOptions
 								setShowOptions={setShowFromOptions}
@@ -210,10 +216,16 @@ export default function HomePage() {
 							/>
 							<TiArrowSortedDown
 								size={18}
-								className={clsx('absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700', {
-									'text-rebeccaPurple': !darkMode,
-									'text-orangedRed': darkMode,
-								})}
+								className={clsx(
+									'absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700',
+									{
+										'text-rebeccaPurple': !darkMode,
+										'text-orangedRed': darkMode,
+									},
+									showToOptions
+										? '-rotate-180 transition-transform duration-300 ease-in'
+										: 'rotate-0 transition-transform duration-300 ease-in',
+								)}
 							/>
 							<CurrencyOptions
 								setShowOptions={setShowToOptions}

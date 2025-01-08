@@ -19,12 +19,12 @@ export default function CurrencyOptions({
 	return (
 		<ul
 			className={clsx(
-				'absolute left-0 top-[3rem] z-10 h-[20rem] w-full flex-col overflow-auto rounded-lg font-inter text-[1.3rem] text-ghostWhite shadow-[0_1.4rem_3rem_#232323]',
+				'absolute left-0 top-[3rem] z-10 flex h-[20rem] w-full flex-col overflow-auto rounded-lg font-inter text-[1.3rem] text-ghostWhite shadow-[0_1.4rem_3rem_#232323] transition-all duration-300 ease-in',
 				{
 					'bg-mediumPurple': !darkMode,
 					'bg-[#903310]': darkMode,
-					hidden: !showOptions,
-					flex: showOptions,
+					'invisible opacity-0': !showOptions,
+					'visible opacity-100': showOptions,
 				},
 			)}
 		>
