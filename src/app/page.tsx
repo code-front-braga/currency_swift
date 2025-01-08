@@ -8,6 +8,7 @@ import { MdCurrencyExchange } from 'react-icons/md';
 import { fetchAvailableCurrencies } from '@/server/actions/fetchAvailableCurrencies';
 import { CurrenciesPair, fetchExchangeRates } from '@/server/actions/fetchExchangeRates';
 import { motion } from 'motion/react';
+import { FaInfoCircle } from 'react-icons/fa';
 
 // Components:
 import formatCurrency from '@/utils/formatCurrency';
@@ -22,6 +23,7 @@ import CurrencySelector from './components/select-currency';
 import CurrencyOptions from './components/options-currency';
 import Button from './components/button';
 import Footer from './components/footer';
+import Info from './components/info';
 
 export default function HomePage() {
 	const { darkMode } = useTheme();
@@ -34,6 +36,7 @@ export default function HomePage() {
 	const [showFromOptions, setShowFromOptions] = useState<boolean>(false);
 	const [showToOptions, setShowToOptions] = useState<boolean>(false);
 	const [isClicked, setIsClicked] = useState<boolean>(false);
+	const [isInfoOpen, setIsInfoOpen] = useState<boolean>(false);
 
 	const handleFromInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -84,7 +87,17 @@ export default function HomePage() {
 			<Background />
 			<Main>
 				<Header />
-				<ThemeToggle />
+
+				<div className="flex w-full items-center justify-between">
+					<ThemeToggle />
+					<Button onClick={() => setIsInfoOpen(!isInfoOpen)}>
+						<FaInfoCircle
+							size={26}
+							className={clsx({ 'text-rebeccaPurple': !darkMode, 'text-orangedRed': darkMode })}
+						/>
+					</Button>
+				</div>
+				<Info isInfoOpen={isInfoOpen} />
 
 				<Form handleSubmit={handleConvertCurrency}>
 					<div
@@ -135,16 +148,12 @@ export default function HomePage() {
 							/>
 							<TiArrowSortedDown
 								size={18}
-								className={clsx(
-									'absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700',
-									{
-										'text-rebeccaPurple': !darkMode,
-										'text-orangedRed': darkMode,
-									},
-									showFromOptions
-										? '-rotate-180 transition-transform duration-300 ease-in'
-										: 'rotate-0 transition-transform duration-300 ease-in',
-								)}
+								className={clsx('absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700', {
+									'text-rebeccaPurple': !darkMode,
+									'text-orangedRed': darkMode,
+									'rotate-0 transition-transform duration-300 ease-in': !showFromOptions,
+									'-rotate-180 transition-transform duration-300 ease-in': showFromOptions,
+								})}
 							/>
 							<CurrencyOptions
 								setShowOptions={setShowFromOptions}
@@ -216,16 +225,12 @@ export default function HomePage() {
 							/>
 							<TiArrowSortedDown
 								size={18}
-								className={clsx(
-									'absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700',
-									{
-										'text-rebeccaPurple': !darkMode,
-										'text-orangedRed': darkMode,
-									},
-									showToOptions
-										? '-rotate-180 transition-transform duration-300 ease-in'
-										: 'rotate-0 transition-transform duration-300 ease-in',
-								)}
+								className={clsx('absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700', {
+									'text-rebeccaPurple': !darkMode,
+									'text-orangedRed': darkMode,
+									'rotate-0 transition-transform duration-300 ease-in': !showToOptions,
+									'-rotate-180 transition-transform duration-300 ease-in': showToOptions,
+								})}
 							/>
 							<CurrencyOptions
 								setShowOptions={setShowToOptions}

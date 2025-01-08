@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { useTheme } from '../hooks/use-theme';
 
-
 export default function Background() {
 	const { darkMode } = useTheme();
 
@@ -12,7 +11,7 @@ export default function Background() {
 				style={{ backgroundImage: 'url(/glitch-effect.png)', backgroundSize: '120px' }}
 			/>
 			<div
-				className={clsx('absolute inset-0 bg-opacity-80 transition-colors duration-700', {
+				className={clsx('absolute inset-0 bg-opacity-90 transition-colors duration-700', {
 					'bg-ghostWhite': !darkMode,
 					'bg-matteBlack': darkMode,
 				})}

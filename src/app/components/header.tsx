@@ -6,7 +6,7 @@ export default function Header() {
 	const { darkMode } = useTheme();
 
 	return (
-		<header className="fixed top-[8rem] w-full">
+		<header className="fixed top-[8rem] flex w-full flex-col">
 			<div className="flex items-center justify-center">
 				<CgArrowsExchangeAltV
 					size={36}
@@ -20,7 +20,7 @@ export default function Header() {
 				>
 					Currency{' '}
 					<span
-						className={clsx('font-inter', {
+						className={clsx('font-inter font-normal', {
 							'text-rebeccaPurple': !darkMode,
 							'text-orangedRed': darkMode,
 						})}
@@ -29,6 +29,18 @@ export default function Header() {
 					</span>
 					wift
 				</h1>
+			</div>
+			<div className="text-center">
+				<span
+					className={clsx('font-inter text-[1.2rem] text-ghostWhite', {
+						'text-nero': !darkMode,
+						'text-ghostWhite': darkMode,
+					})}
+				>
+					{new Date().toLocaleDateString('pt-BR', {
+						dateStyle: 'full',
+					})}
+				</span>
 			</div>
 		</header>
 	);
