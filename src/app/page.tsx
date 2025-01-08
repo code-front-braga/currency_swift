@@ -121,8 +121,8 @@ export default function HomePage() {
 								className={clsx(
 									'relative w-full cursor-pointer border-l p-[.4rem] font-inter transition-colors duration-700',
 									{
-										'text-nero': !darkMode,
-										'text-ghostWhite': darkMode,
+										'border-l-nero text-nero': !darkMode,
+										'border-l-ghostWhite text-ghostWhite': darkMode,
 									},
 								)}
 							/>
@@ -192,8 +192,8 @@ export default function HomePage() {
 								}}
 								selectedCurrency={toInput}
 								className={clsx('w-full cursor-pointer border-l p-[.4rem] font-inter transition-colors duration-700', {
-									'text-nero': !darkMode,
-									'text-ghostWhite': darkMode,
+									'border-l-nero text-nero': !darkMode,
+									'border-l-ghostWhite text-ghostWhite': darkMode,
 								})}
 							/>
 							<TiArrowSortedDown
