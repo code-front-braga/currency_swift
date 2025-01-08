@@ -19,7 +19,7 @@ export default function CurrencyOptions({
 	return (
 		<ul
 			className={clsx(
-				'text-ghostWhite absolute left-0 top-[3rem] z-10 h-[20rem] w-full flex-col overflow-auto rounded-lg font-inter text-[1.3rem] shadow-lg',
+				'absolute left-0 top-[3rem] z-10 h-[20rem] w-full flex-col overflow-auto rounded-lg font-inter text-[1.3rem] text-ghostWhite shadow-[0_1.4rem_3rem_#232323]',
 				{
 					'bg-mediumPurple': !darkMode,
 					'bg-[#903310]': darkMode,
