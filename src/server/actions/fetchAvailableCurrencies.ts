@@ -1,4 +1,4 @@
-export async function fetchAvailableCurrencies() {
+export async function fetchAvailableCurrencies(): Promise<string[]> {
 	try {
 		const response = await fetch('https://economia.awesomeapi.com.br/json/available');
 		const data = await response.json();

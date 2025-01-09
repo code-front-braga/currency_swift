@@ -6,7 +6,6 @@ import { useTheme } from './hooks/use-theme';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { MdCurrencyExchange } from 'react-icons/md';
 import { fetchAvailableCurrencies } from '@/server/actions/fetchAvailableCurrencies';
-import { CurrenciesPair, fetchExchangeRates } from '@/server/actions/fetchExchangeRates';
 import { motion } from 'motion/react';
 import { FaInfoCircle } from 'react-icons/fa';
 
@@ -24,6 +23,7 @@ import CurrencyOptions from './components/options-currency';
 import Button from './components/button';
 import Footer from './components/footer';
 import Info from './components/info';
+import { fetchExchangeRates } from '@/server/actions/fetchExchangeRates';
 
 export default function HomePage() {
 	const { darkMode } = useTheme();
@@ -50,18 +50,24 @@ export default function HomePage() {
 
 	const handleConvertCurrency = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (!amount || isNaN(parseFloat(amount))) {
+		if (!debouncedAmount || isNaN(parseFloat(debouncedAmount))) {
+			return;
+		}
+
+		if (fromInput === toInput) {
+			setConvertedAmount(parseFloat(debouncedAmount).toFixed(2));
 			return;
 		}
 
 		try {
-			const data: CurrenciesPair = await fetchExchangeRates(fromInput);
-			const rate = data.rates[toInput];
-			if (!rate) {
+			const data = await fetchExchangeRates({ fromCurrency: fromInput, toCurrency: toInput });
+			if (!data || !data.bid) {
 				return;
 			}
 
-			const result = (parseFloat(debouncedAmount) * rate).toFixed(2);
+			const rate = parseFloat(data.bid);
+			const result = (parseFloat(amount) * rate).toFixed(2);
+
 			setConvertedAmount(result);
 		} catch (error) {
 			console.log(error);

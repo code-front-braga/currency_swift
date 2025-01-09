@@ -1,16 +1,24 @@
-export interface CurrenciesPair {
-	rates: {
-		[key: string]: number;
-	};
+interface ExchangeRateData {
+	bid: string;
 }
 
-export async function fetchExchangeRates(baseCurrency: string): Promise<CurrenciesPair> {
+interface CurrenciesPair {
+	fromCurrency: string;
+	toCurrency: string;
+}
+
+export async function fetchExchangeRates({
+	fromCurrency,
+	toCurrency,
+}: CurrenciesPair): Promise<ExchangeRateData | null> {
 	try {
-		const response = await fetch(`https://open.er-api.com/v6/latest/${baseCurrency}`);
-		const data: CurrenciesPair = await response.json();
-		return data;
+		const response = await fetch(`https://economia.awesomeapi.com.br/json/last/${fromCurrency}-${toCurrency}`);
+		const data = await response.json();
+
+		const key = `${fromCurrency}${toCurrency}`;
+		return data[key] || null;
 	} catch (error) {
-		console.log(error);
-		return { rates: {} };
+		console.error('Error fetching exchange rates', error);
+		return null;
 	}
 }
