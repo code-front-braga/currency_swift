@@ -62,6 +62,8 @@ export default function HomePage() {
 		try {
 			const data = await fetchExchangeRates({ fromCurrency: fromInput, toCurrency: toInput });
 			if (!data || !data.bid) {
+				setToInput(fromInput);
+				setConvertedAmount(parseFloat(debouncedAmount).toFixed(2));
 				return;
 			}
 
@@ -70,13 +72,16 @@ export default function HomePage() {
 
 			setConvertedAmount(result);
 		} catch (error) {
-			console.log(error);
+			console.error('Error caught in handleConvertCurrency:', error);
+			alert((error as Error).message);
+			setToInput(fromInput);
+			setConvertedAmount(parseFloat(debouncedAmount).toFixed(2));
 		}
 	};
 
 	const handleClick = () => {
-		setIsClicked(true); // Ativa a animação
-		setTimeout(() => setIsClicked(false), 1000); // Reseta o estado após a animação
+		setIsClicked(true);
+		setTimeout(() => setIsClicked(false), 1000);
 	};
 
 	useEffect(() => {
