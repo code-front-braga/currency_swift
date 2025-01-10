@@ -55,7 +55,7 @@ export default function HomePage() {
 		}
 
 		if (fromInput === toInput) {
-			setConvertedAmount(parseFloat(debouncedAmount).toFixed(2));
+			setConvertedAmount(parseFloat(debouncedAmount).toString());
 			return;
 		}
 
@@ -63,19 +63,19 @@ export default function HomePage() {
 			const data = await fetchExchangeRates({ fromCurrency: fromInput, toCurrency: toInput });
 			if (!data || !data.bid) {
 				setToInput(fromInput);
-				setConvertedAmount(parseFloat(debouncedAmount).toFixed(2));
+				setConvertedAmount(parseFloat(debouncedAmount).toString());
 				return;
 			}
 
 			const rate = parseFloat(data.bid);
-			const result = (parseFloat(amount) * rate).toFixed(2);
+			const result = (parseFloat(amount) * rate).toString();
 
 			setConvertedAmount(result);
 		} catch (error) {
 			console.error('Error caught in handleConvertCurrency:', error);
 			alert((error as Error).message);
 			setToInput(fromInput);
-			setConvertedAmount(parseFloat(debouncedAmount).toFixed(2));
+			setConvertedAmount(parseFloat(debouncedAmount).toString());
 		}
 	};
 
@@ -104,7 +104,15 @@ export default function HomePage() {
 					<Button onClick={() => setIsInfoOpen(!isInfoOpen)}>
 						<FaInfoCircle
 							size={26}
-							className={clsx({ 'text-rebeccaPurple': !darkMode, 'text-orangedRed': darkMode })}
+							className={clsx(
+								darkMode
+									? isInfoOpen
+										? 'text-lime'
+										: 'text-orangedRed'
+									: isInfoOpen
+										? 'text-orangedRed'
+										: 'text-rebeccaPurple',
+							)}
 						/>
 					</Button>
 				</div>
@@ -114,10 +122,13 @@ export default function HomePage() {
 					<div
 						className={clsx(
 							'relative flex w-full items-center gap-2 rounded-[.6rem] border-b-[.3em] p-[.8rem] transition-colors duration-700',
-							{
-								'border-rebeccaPurple bg-lavender': !darkMode,
-								'border-orangedRed bg-matteBlack': darkMode,
-							},
+							darkMode
+								? showFromOptions
+									? 'border-lime bg-matteBlack' // Quando em dark mode e aberFrom
+									: 'border-orangedRed bg-matteBlack' // Quando em dark mode e fechado
+								: showFromOptions
+									? 'border-orangedRed bg-lavender' // Quando em light mode e aberto
+									: 'border-rebeccaPurple bg-lavender', // Quando em light mode e fechado
 						)}
 					>
 						<Label
@@ -145,12 +156,10 @@ export default function HomePage() {
 						/>
 						<div className="relative w-[30%]">
 							<CurrencySelector
-								onHandleClick={() => {
-									setShowFromOptions(!showFromOptions);
-								}}
+								onHandleClick={() => setShowFromOptions(!showFromOptions)}
 								selectedCurrency={fromInput}
 								className={clsx(
-									'relative w-full cursor-pointer border-l p-[.4rem] font-inter transition-colors duration-700',
+									'relative flex w-full cursor-pointer items-center gap-[.6rem] border-l p-[.4rem] font-inter transition-colors duration-700',
 									{
 										'border-l-nero text-nero': !darkMode,
 										'border-l-ghostWhite text-ghostWhite': darkMode,
@@ -159,12 +168,22 @@ export default function HomePage() {
 							/>
 							<TiArrowSortedDown
 								size={18}
-								className={clsx('absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700', {
-									'text-rebeccaPurple': !darkMode,
-									'text-orangedRed': darkMode,
-									'rotate-0 transition-transform duration-300 ease-in': !showFromOptions,
-									'-rotate-180 transition-transform duration-300 ease-in': showFromOptions,
-								})}
+								className={clsx(
+									'absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700',
+									// darkMode ? 'text-orangedRed' : showFromOptions ? 'text-rebeccaPurple' : 'text-lime',
+									darkMode
+										? showFromOptions
+											? 'text-lime' // Quando em dark mode e aberto
+											: 'text-orangedRed' // Quando em dark mode e fechado
+										: showFromOptions
+											? 'text-orangedRed' // Quando em light mode e aberto
+											: 'text-rebeccaPurple', // Quando em light mode e fechado
+
+									// Animação de rotação da seta
+									showFromOptions
+										? '-rotate-180 transition-transform duration-300 ease-in'
+										: 'rotate-0 transition-transform duration-300 ease-in',
+								)}
 							/>
 							<CurrencyOptions
 								setShowOptions={setShowFromOptions}
@@ -193,10 +212,13 @@ export default function HomePage() {
 					<div
 						className={clsx(
 							'relative flex w-full items-center gap-2 rounded-[.6rem] border-b-[.3em] p-[.8rem] transition-colors duration-700',
-							{
-								'border-rebeccaPurple bg-lavender': !darkMode,
-								'border-orangedRed bg-matteBlack': darkMode,
-							},
+							darkMode
+								? showToOptions
+									? 'border-lime bg-matteBlack' // Quando em dark mode e aberto
+									: 'border-orangedRed bg-matteBlack' // Quando em dark mode e fechado
+								: showToOptions
+									? 'border-orangedRed bg-lavender' // Quando em light mode e aberto
+									: 'border-rebeccaPurple bg-lavender', // Quando em light mode e fechado
 						)}
 					>
 						<Label
@@ -225,23 +247,33 @@ export default function HomePage() {
 						/>
 						<div className="relative w-[30%]">
 							<CurrencySelector
-								onHandleClick={() => {
-									setShowToOptions(!showToOptions);
-								}}
+								onHandleClick={() => setShowToOptions(!showToOptions)}
 								selectedCurrency={toInput}
-								className={clsx('w-full cursor-pointer border-l p-[.4rem] font-inter transition-colors duration-700', {
-									'border-l-nero text-nero': !darkMode,
-									'border-l-ghostWhite text-ghostWhite': darkMode,
-								})}
+								className={clsx(
+									'flex w-full cursor-pointer items-center gap-[.6rem] border-l p-[.4rem] font-inter transition-colors duration-700',
+									{
+										'border-l-nero text-nero': !darkMode,
+										'border-l-ghostWhite text-ghostWhite': darkMode,
+									},
+								)}
 							/>
 							<TiArrowSortedDown
 								size={18}
-								className={clsx('absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700', {
-									'text-rebeccaPurple': !darkMode,
-									'text-orangedRed': darkMode,
-									'rotate-0 transition-transform duration-300 ease-in': !showToOptions,
-									'-rotate-180 transition-transform duration-300 ease-in': showToOptions,
-								})}
+								className={clsx(
+									'absolute right-[.4rem] top-1/2 -translate-y-1/2 transition-colors duration-700',
+									darkMode
+										? showToOptions
+											? 'text-lime' // Quando em dark mode e aberto
+											: 'text-orangedRed' // Quando em dark mode e fechado
+										: showToOptions
+											? 'text-orangedRed' // Quando em light mode e aberto
+											: 'text-rebeccaPurple', // Quando em light mode e fechado
+
+									// Animação de rotação da seta
+									showToOptions
+										? '-rotate-180 transition-transform duration-300 ease-in'
+										: 'rotate-0 transition-transform duration-300 ease-in',
+								)}
 							/>
 							<CurrencyOptions
 								setShowOptions={setShowToOptions}

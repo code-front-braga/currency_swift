@@ -1,5 +1,7 @@
 import clsx from 'clsx';
 import { useTheme } from '../hooks/use-theme';
+import Image from 'next/image';
+import getImage from '@/utils/getImage';
 
 interface CurrencyOptionsProps {
 	currencies: string[];
@@ -19,7 +21,7 @@ export default function CurrencyOptions({
 	return (
 		<ul
 			className={clsx(
-				'absolute left-0 top-[3rem] z-10 flex h-[20rem] w-full flex-col overflow-auto rounded-lg font-inter text-[1.3rem] text-ghostWhite shadow-[0_1.4rem_3rem_#232323] transition-all duration-300 ease-in',
+				'absolute left-0 top-[3rem] z-10 flex h-[20rem] w-full flex-col overflow-auto rounded-lg font-inter text-ghostWhite shadow-[0_1.4rem_3rem_#232323] transition-all duration-300 ease-in',
 				{
 					'bg-mediumPurple': !darkMode,
 					'bg-[#903310]': darkMode,
@@ -28,18 +30,22 @@ export default function CurrencyOptions({
 				},
 			)}
 		>
-			{currencies.map(currency => (
-				<li
-					key={currency}
-					onClick={() => {
-						onHandleClick(currency);
-						setShowOptions(false);
-					}}
-					className="w-full cursor-pointer p-[.8rem] text-center"
-				>
-					{currency}
-				</li>
-			))}
+			{currencies.map(currency => {
+				const currencyCode = currency.slice(0, 2);
+				return (
+					<li
+						key={currency}
+						onClick={() => {
+							onHandleClick(currency);
+							setShowOptions(false);
+						}}
+						className="flex w-full cursor-pointer justify-around p-[.8rem]"
+					>
+						<Image src={getImage(currencyCode)} alt="" width={22} height={0} />
+						<span>{currency}</span>
+					</li>
+				);
+			})}
 		</ul>
 	);
 }
