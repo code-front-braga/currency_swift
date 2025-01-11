@@ -5,14 +5,18 @@ import { motion } from 'motion/react';
 import { useTheme } from '../hooks/use-theme';
 
 export default function ThemeToggle() {
-	const {darkMode, toggleTheme } = useTheme();
+	const { darkMode, toggleTheme } = useTheme();
 
 	return (
 		<button
-			className={clsx('relative flex h-[3rem] w-[5rem] cursor-pointer items-center self-start rounded-full p-[.5rem]', {
-				'justify-start bg-rebeccaPurple bg-opacity-60': !darkMode,
-				'justify-end bg-orangedRed bg-opacity-50': darkMode,
-			})}
+			className={clsx(
+				'relative flex h-[3rem] w-[5rem] cursor-pointer items-center self-start rounded-full p-[.5rem]',
+				'lg:bg-opacity-100',
+				{
+					'justify-start bg-rebeccaPurple bg-opacity-60': !darkMode,
+					'justify-end bg-orangedRed bg-opacity-50': darkMode,
+				},
+			)}
 			onClick={toggleTheme}
 		>
 			<motion.div

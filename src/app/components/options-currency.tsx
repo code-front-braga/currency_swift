@@ -22,6 +22,7 @@ export default function CurrencyOptions({
 		<ul
 			className={clsx(
 				'absolute left-0 top-[3rem] z-10 flex h-[20rem] w-full flex-col overflow-auto rounded-lg font-inter text-ghostWhite shadow-[0_1.4rem_3rem_#232323] transition-all duration-300 ease-in',
+				'md:text-[1.6rem]',
 				{
 					'bg-mediumPurple': !darkMode,
 					'bg-[#903310]': darkMode,
@@ -39,9 +40,9 @@ export default function CurrencyOptions({
 							onHandleClick(currency);
 							setShowOptions(false);
 						}}
-						className="flex w-full cursor-pointer justify-around p-[.8rem]"
+						className={clsx('flex w-full cursor-pointer justify-around p-[.8rem]', 'gap-[1rem] md:justify-center')}
 					>
-						<Image src={getImage(currencyCode)} alt="" width={22} height={0} />
+						<Image src={getImage(currencyCode)} alt="" width={22} height={0} className="md:w-[32px]" />
 						<span>{currency}</span>
 					</li>
 				);

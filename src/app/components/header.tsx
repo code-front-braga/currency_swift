@@ -6,14 +6,14 @@ export default function Header() {
 	const { darkMode } = useTheme();
 
 	return (
-		<header className="fixed top-[8rem] flex w-full flex-col">
+		<header className={clsx('fixed flex w-full flex-col p-[2rem]', '')}>
 			<div className="flex items-center justify-center">
 				<CgArrowsExchangeAltV
 					size={36}
 					className={clsx({ 'text-rebeccaPurple': !darkMode, 'text-orangedRed': darkMode })}
 				/>
 				<h1
-					className={clsx('font-alumniSansPinstripe text-[3rem] font-semibold', {
+					className={clsx('font-alumniSansPinstripe text-[3rem] font-semibold', 'md:text-[4rem]', 'lg:text-[3rem]', {
 						'text-matteBlack': !darkMode,
 						'bg-gradient-to-r from-orangedRed via-gold to-orangedRed bg-clip-text text-transparent': darkMode,
 					})}
@@ -32,7 +32,7 @@ export default function Header() {
 			</div>
 			<div className="text-center">
 				<span
-					className={clsx('font-inter text-[1.2rem] text-ghostWhite', {
+					className={clsx('font-inter text-[1.2rem] text-ghostWhite', 'md:text-[1.6rem]', 'lg:text-[1.4rem]', {
 						'text-nero': !darkMode,
 						'text-ghostWhite': darkMode,
 					})}

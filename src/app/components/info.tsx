@@ -11,7 +11,7 @@ export default function Info({ isInfoOpen }: InfoProps) {
 	return (
 		<div
 			className={clsx(
-				'absolute left-1/2 top-[10rem] w-[32rem] -translate-x-1/2 gap-1 rounded-[1rem] border p-[.6rem] shadow-2xl transition-all duration-300 ease-in',
+				'absolute -top-[11rem] left-1/2 w-[32rem] -translate-x-1/2 gap-1 rounded-[1rem] border p-[.6rem] shadow-2xl transition-all duration-300 ease-in',
 				{
 					'border-rebeccaPurple bg-lavender text-nero': !darkMode,
 					'border-orangedRed bg-nero text-ghostWhite': darkMode,
@@ -37,6 +37,7 @@ export default function Info({ isInfoOpen }: InfoProps) {
 				<li>Insira o valor que deseja converter</li>
 				<li>Selecione a moeda de origem</li>
 				<li>Escolha a moeda para a qual deseja converter</li>
+				<li>E aperte o ícone central</li>
 			</ol>
 		</div>
 	);

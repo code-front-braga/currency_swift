@@ -17,7 +17,7 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="pt-br">
-			<body className={clsx('antialiased', inter.className, alumniSansPinstripe.className)}>
+			<body className={clsx('flex h-svh w-full antialiased', inter.className, alumniSansPinstripe.className)}>
 				<ThemeProvider>{children}</ThemeProvider>
 			</body>
 		</html>
