@@ -35,6 +35,27 @@ Siga os passos abaixo para rodar o projeto no seu ambiente local:
    git clone git@github.com:code-front-braga/currency_swift.git
    ```
 
+2. Instale as dependências:
+  ```bash
+  npm install
+   ```
+
+3. Inicie o servidor de desenvolvimento:
+  ```bash
+  npm run dev
+   ```
+
+4. Abra o navegador e acesse::
+  ```bash
+  http://localhost:3000
+   ```
+
+## ✉️ Contato
+Se tiver dúvidas ou sugestões, entre em contato comigo:
+
+- LinkedIn: [](https://www.linkedin.com/in/leonardo-braga-8b7856216/)
+
+
 ## 📝 Licença:
 
 Este projeto está licenciado sob a licença MIT.
