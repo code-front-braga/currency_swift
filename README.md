@@ -1,7 +1,9 @@
 # 💱 Currency $wift
 
+<div style="text-align: center">
 <img src='/public/dark_screen.png' alt='Print do Projeto Modo Dark' />
 <img src='/public/light_screen.png' alt='Print do Projeto Modo Light' />
+</div>
 
 Bem-vindo ao **Conversor de Moedas**, um projeto criado para facilitar a conversão de valores entre diferentes moedas de forma rápida e intuitiva.
 
