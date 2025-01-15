@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="358.7627 267.2401 129.3563 114.7041" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <text style="fill: rgb(168, 81, 99); font-family: Arial, sans-serif; font-size: 34.3px; font-weight: 700; text-transform: lowercase; white-space: pre;" x="476.694" y="333.808">;</text>
+    <text style="fill: rgb(92, 88, 99); font-family: Constantia; font-size: 500px; white-space: pre;" transform="matrix(0.103428, 0, 0, 0.174295, 310.671056, 190.036548)" x="464.977" y="917.44">{</text>
+    <text style="fill: rgb(92, 88, 99); font-family: Constantia; font-size: 500px; white-space: pre;" transform="matrix(-0.103428, 0, 0, -0.174295, 527.084419, 459.147742)" x="464.977" y="917.44">{</text>
+    <polygon class="cls-8" points="430.333 291.171 418.967 291.171 397.31 358.198 408.623 358.198 409.995 354.05 422.33 315.96 430.333 291.171" style="fill-rule: nonzero; paint-order: fill; fill: rgb(180, 222, 193);"/>
+    <path d="M 412.862 358.082 C 459.532 360.773 461.864 315.652 427.359 313.117" style="paint-order: fill; fill: rgb(92, 88, 99);"/>
+    <polygon class="cls-8" points="416.141 291.132 404.775 291.132 383.118 358.158 394.431 358.158 395.803 354.01 408.138 315.921 416.141 291.132" style="fill-rule: nonzero; paint-order: fill; fill: rgb(180, 222, 193);"/>
+    <ellipse style="fill: rgb(168, 81, 99);" cx="457.182" cy="353.676" rx="4.64" ry="4.64"/>
+  </g>
+</svg>
